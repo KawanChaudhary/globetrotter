@@ -63,9 +63,9 @@ const quizSlice = createSlice({
     },
     checkAnswerSuccess(state, action) {
       state.loading = false;
-      state.quiz = action.payload.quizItem;
+      state.quiz = action.payload.quiz;
       state.currentScore = action.payload.currentScore;
-      state.isCorrect = action.payload.quizItem.correctAnswer === state.chosedAnswer;
+      state.isCorrect = action.payload.quiz.correctAnswer === state.chosedAnswer;
     },
     checkAnswerFailure(state, action: PayloadAction<string>) {
       state.loading = false;

@@ -33,7 +33,6 @@ function* handleGetClue(action: ReturnType<typeof getClue>) {
 function* handleCheckAnswer(action: ReturnType<typeof checkAnswer>) {
   try {
     const response = yield call(updateScore, action.payload);
-    console.log(response);
     yield put(checkAnswerSuccess(response));
   } catch (error) {
     yield put(checkAnswerFailure(error.message));

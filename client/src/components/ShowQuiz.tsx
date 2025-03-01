@@ -54,11 +54,11 @@ const ShowQuiz = () => {
 
   useEffect(() => {
     if (!submitted) return;
-    console.log("Updated quiz:", quiz);
     if (isCorrect) {
       setShowConfetti(true);
 
       let countdown = 6;
+      setTimer(() => 6);
       const interval = setInterval(() => {
         countdown -= 1;
         setTimer(countdown);
@@ -67,7 +67,7 @@ const ShowQuiz = () => {
       setTimeout(() => {
         clearInterval(interval);
         setShowConfetti(false);
-        getNewQuiz(); // ✅ Move to next quiz
+        getNewQuiz();
       }, 6000);
     } else {
       setShowSadAnimation(true);
@@ -99,7 +99,7 @@ const ShowQuiz = () => {
         <h2 className="text-2xl font-bold mb-4 font-mono">{quiz.trivia}</h2>
         <div className="flex justify-between ">
           <ul className="mb-4">
-            {quiz.options.map((option, index) => (
+            {quiz.options && quiz?.options.length > 0 && quiz?.options.map((option, index) => (
               <li key={index} className="mb-2">
                 <label
                   className={`flex items-center font-mono ${
