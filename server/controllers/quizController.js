@@ -142,7 +142,7 @@ exports.updateCurrentScore = async (req, res) => {
           correctAnswer: quizItem.correctAnswer,
         },
       };
-      if (user.activeQuiz.score > 0)
+      if (user.activeQuiz.score !== 0)
         user.attempts.push({
           date: new Date(),
           correct: user.activeQuiz.quizzes.filter(
@@ -150,6 +150,7 @@ exports.updateCurrentScore = async (req, res) => {
           ).length,
           score: user.activeQuiz.score,
         });
+        user.highestScore = Math.max(user.highestScore, user.activeQuiz.score);
       user.activeQuiz = null;
       await user.save();
       return res.status(200).json(quizData);

@@ -11,7 +11,11 @@ import { useWindowSize } from "react-use";
 import { Player } from "@lottiefiles/react-lottie-player";
 import sadAnimation from "../assets/sad.json";
 
-const ShowQuiz = () => {
+interface ShowQuizProps {
+    handleDoneQuiz: () => void;
+}
+
+const ShowQuiz:React.FC<ShowQuizProps> = ({handleDoneQuiz}) => {
   const dispatch = useDispatch();
   const { quiz, loading, error, clueUsed, submitted, currentScore, isCorrect } =
     useSelector((state: RootState) => state.quiz);
@@ -73,6 +77,7 @@ const ShowQuiz = () => {
       setShowSadAnimation(true);
       setTimeout(() => {
         setShowSadAnimation(false);
+        handleDoneQuiz();
       }, 3000);
     }
   }, [quiz]);
