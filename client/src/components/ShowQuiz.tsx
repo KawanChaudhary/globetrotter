@@ -72,11 +72,10 @@ const ShowQuiz = () => {
     } else {
       setShowSadAnimation(true);
       setTimeout(() => {
-        setShowSadAnimation(false)
+        setShowSadAnimation(false);
       }, 3000);
     }
   }, [quiz]);
-
 
   if (!quiz) {
     return null;
@@ -96,41 +95,39 @@ const ShowQuiz = () => {
         </div>
       )}
 
-      <div className="w-full max-w-4xl p-8 bg-gray-200 rounded-lg shadow-lg text-black">
+      <div className="w-full max-w-4xl p-8 bg-gray-100 rounded-lg shadow-lg text-black">
         <h2 className="text-2xl font-bold mb-4 font-mono">{quiz.trivia}</h2>
         <div className="flex justify-between ">
-
-        <ul className="mb-4">
-          {quiz.options.map((option, index) => (
+          <ul className="mb-4">
+            {quiz.options.map((option, index) => (
               <li key={index} className="mb-2">
-              <label
-                className={
-                  "flex items-center font-mono" +
-                  (submitted
-                    ? quiz.correctAnswer === option
-                      ? "text-green-500"
-                      : "text-red-500"
-                    : "")
-                }
-              >
-                <input
-                  type="radio"
-                  name="option"
-                  disabled={submitted}
-                  value={option}
-                  checked={selectedOption === option}
-                  onChange={() => handleOptionChange(option)}
-                  className="mr-2"
+                <label
+                  className={`flex items-center font-mono ${
+                    submitted
+                      ? quiz.correctAnswer === option
+                        ? "text-green-500"
+                        : "text-red-500"
+                      : "text-gray-900"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="option"
+                    disabled={submitted}
+                    value={option}
+                    checked={selectedOption === option}
+                    onChange={() => handleOptionChange(option)}
+                    className="mr-2"
                   />
-                {option}
-              </label>
-            </li>
-          ))}
-        </ul>
-        <p className="flex items-center justify-around">
+                  {option}
+                </label>
+              </li>
+            ))}
+          </ul>
+          <p className="flex items-center justify-around">
             <span className="font-bold">Score: {currentScore}</span>
-        </p>
-          </div>
+          </p>
+        </div>
         <div className="flex flex-col">
           <div className="flex gap-5 items-center mb-6">
             <button
@@ -159,15 +156,16 @@ const ShowQuiz = () => {
           {selectedOption && (
             <button
               onClick={handleSubmit}
-              className={`p-2 cursor-pointer bg-blue-500 text-white font-bold rounded-lg shadow-md 
-                hover:bg-blue-700 transition duration-300 flex items-center justify-center min-w-[160px]`}
+              className={`p-2 cursor-pointer border-2 border-green-700 text-green-700 font-bold 
+                rounded-lg shadow-md transition duration-300 flex items-center justify-center 
+                min-w-[160px] outline-none hover:bg-green-700 hover:text-white`}
               disabled={submitted}
             >
               {submitted ? (
                 isCorrect ? (
                   <span className="flex items-center gap-2">
                     <span>Next in</span>
-                    <span className="w-6 h-6 flex items-center justify-center bg-white text-blue-500 font-bold rounded-full">
+                    <span className="w-6 h-6 flex items-center justify-center from-red-50 to-red-200 text-blue-500 font-bold rounded-full">
                       {timer}
                     </span>
                   </span>

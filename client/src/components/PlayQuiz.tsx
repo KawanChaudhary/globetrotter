@@ -8,7 +8,7 @@ const PlayQuiz: React.FC<PlayQuizProps> = ({
   handleStartQuiz,
 }: PlayQuizProps) => {
   return (
-    <div className="w-full max-w-3xl p-8 bg-gray-200 rounded-lg shadow-lg text-zinc-800 font-mono">
+    <div className="w-full max-w-3xl p-8 bg-gray-100 rounded-lg shadow-lg text-zinc-800 font-mono">
       <h1 className="text-4xl font-bold text-center mb-8">
         Welcome to the Quiz!
       </h1>
