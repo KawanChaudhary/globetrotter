@@ -96,3 +96,16 @@ exports.getUser = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+exports.checkUsername = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    if (user) {
+      return res.status(409).json({message: 'Username already taken'});
+    }
+    return res.json({ isAvailable: true });
+  } catch (error) {
+    return res.status(500).json({ message: 'Server error' });
+  }
+}
