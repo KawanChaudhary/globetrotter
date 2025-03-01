@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
 
 const quizItemSchema = new mongoose.Schema({
-  _id: { type: String, unique: true },
   trivia: { type: String, required: true },
   options: [{type: String, required: true }],
   correctAnswer: { type: String, required: true },
-  clue: { type: String, required: true },
+  clue: {type: String, required: true},
   funFact: { type: String, required: true },
 });
 
