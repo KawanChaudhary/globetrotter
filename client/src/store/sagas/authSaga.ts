@@ -1,5 +1,5 @@
 import { call, put, takeLatest, debounce } from 'redux-saga/effects';
-import { login, register, checkUsername } from '../../endpoints';
+import { login, register, checkUsername, getUserDetails } from '../../endpoints';
 import {
   loginRequest,
   loginSuccess,
@@ -10,8 +10,9 @@ import {
   checkUsernameRequest,
   checkUsernameSuccess,
   checkUsernameFailure,
+  fetchUserRequest, fetchUserSuccess, fetchUserFailure
 } from '../reducers/authReducer';
-import { userResponse } from '@/types';
+import { User, userResponse } from '@/types';
 
 function* handleLogin(action: ReturnType<typeof loginRequest>) {
   try {
@@ -40,8 +41,18 @@ function* handleCheckUsername(action: ReturnType<typeof checkUsernameRequest>) {
   }
 }
 
+function* fetchUserSaga() {
+  try {
+    const response = yield call(getUserDetails);
+    yield put(fetchUserSuccess(response));
+  } catch (error) {
+    yield put(fetchUserFailure(error.response.data.message));
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(loginRequest.type, handleLogin);
   yield takeLatest(registerRequest.type, handleRegister);
   yield debounce(500, checkUsernameRequest.type, handleCheckUsername);
+  yield takeLatest(fetchUserRequest.type, fetchUserSaga);
 }

@@ -6,8 +6,6 @@ import { RootState } from '../store/reducers';
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.auth.user);
-
-  console.log(user)
   
   return (
     <div className="flex flex-col text-center gap-5 items-center justify-center min-h-screen">
