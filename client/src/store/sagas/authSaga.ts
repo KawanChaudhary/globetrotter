@@ -11,23 +11,23 @@ import {
   checkUsernameSuccess,
   checkUsernameFailure,
 } from '../reducers/authReducer';
-import { LoginResponse, RegisterResponse } from '../../endpoints/types';
+import { userResponse } from '@/types';
 
 function* handleLogin(action: ReturnType<typeof loginRequest>) {
   try {
-    const response: LoginResponse = yield call(login, action.payload.username, action.payload.password);
-    yield put(loginSuccess({ user: response.user, token: response.token }));
+    const response: userResponse = yield call(login, action.payload.username, action.payload.password);
+    yield put(loginSuccess(response.user));
   } catch (error) {
-    yield put(loginFailure(error.message));
+    yield put(loginFailure(error.response.data.message));
   }
 }
 
 function* handleRegister(action: ReturnType<typeof registerRequest>) {
   try {
-    const response: RegisterResponse = yield call(register, action.payload.username, action.payload.email, action.payload.password);
-    yield put(registerSuccess({ user: response.user, token: response.token }));
+    const response: userResponse = yield call(register, action.payload.username, action.payload.email, action.payload.password);
+    yield put(registerSuccess(response.user));
   } catch (error) {
-    yield put(registerFailure(error.message));
+    yield put(registerFailure(error.response.data.message));
   }
 }
 
@@ -36,7 +36,7 @@ function* handleCheckUsername(action: ReturnType<typeof checkUsernameRequest>) {
     const response: boolean = yield call(checkUsername, action.payload);
     yield put(checkUsernameSuccess(response));
   } catch (error) {
-    yield put(checkUsernameFailure(error.message));
+    yield put(checkUsernameFailure(error.response.data.message));
   }
 }
 

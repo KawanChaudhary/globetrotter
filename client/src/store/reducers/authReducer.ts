@@ -3,18 +3,14 @@ import { User } from '../../types';
 
 interface AuthState {
   user: User | null;
-  token: string | null;
   loading: boolean;
   error: string | null;
-  isUsernameAvailable: boolean | null;
 }
 
 const initialState: AuthState = {
   user: null,
-  token: null,
   loading: false,
   error: null,
-  isUsernameAvailable: null,
 };
 
 const authSlice = createSlice({
@@ -25,9 +21,8 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    loginSuccess(state, action: PayloadAction<{ user: User; token: string }>) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
+    loginSuccess(state, action: PayloadAction<User>) {
+      state.user = action.payload;
       state.loading = false;
     },
     loginFailure(state, action: PayloadAction<string>) {
@@ -38,9 +33,8 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    registerSuccess(state, action: PayloadAction<{ user: User; token: string }>) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
+    registerSuccess(state, action: PayloadAction<User>) {
+      state.user = action.payload;
       state.loading = false;
     },
     registerFailure(state, action: PayloadAction<string>) {
@@ -51,8 +45,7 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    checkUsernameSuccess(state, action: PayloadAction<boolean>) {
-      state.isUsernameAvailable = action.payload;
+    checkUsernameSuccess(state) {
       state.loading = false;
     },
     checkUsernameFailure(state, action: PayloadAction<string>) {
@@ -61,7 +54,6 @@ const authSlice = createSlice({
     },
     logout(state) {
       state.user = null;
-      state.token = null;
     },
   },
 });

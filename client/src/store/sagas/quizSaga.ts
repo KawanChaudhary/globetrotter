@@ -15,7 +15,7 @@ function* handleFetchQuizItems() {
     const response: QuizItem[] = yield call(fetchQuizItems);
     yield put(fetchQuizItemsSuccess(response));
   } catch (error) {
-    yield put(fetchQuizItemsFailure(error.message));
+    yield put(fetchQuizItemsFailure(error.response.data.message));
   }
 }
 
@@ -24,7 +24,7 @@ function* handleCheckAnswers(action: ReturnType<typeof checkAnswersRequest>) {
     const response: CheckAnswersResponse = yield call(checkAnswers, action.payload.answers);
     yield put(checkAnswersSuccess(response));
   } catch (error) {
-    yield put(checkAnswersFailure(error.message));
+    yield put(checkAnswersFailure(error.response.data.message));
   }
 }
 
