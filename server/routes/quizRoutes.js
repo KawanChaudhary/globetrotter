@@ -1,11 +1,11 @@
 const express = require('express');
-const { getQuizItems, getClue, checkAnswers } = require('../controllers/quizController');
-const auth = require('../middleware/auth');
+const { getRandomQuiz, getClue, updateCurrentScore } = require('../controllers/quizController');
+const { authenticate } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.get('/get', auth, getQuizItems);
-router.get('/:id/clue', auth, getClue);
-router.post('/check-answers', auth, checkAnswers);
+router.get('/random', authenticate, getRandomQuiz);
+router.get('/clue/:id', authenticate, getClue);
+router.post('/update-score', authenticate, updateCurrentScore);
 
 module.exports = router;

@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   numberOfAttempts: { type: Number, default: 0 },
   highestScore: { type: Number, default: 0 },
+  currentScore: { type: Number, default: 0 },
   attempts: [attemptSchema]
 });
 
