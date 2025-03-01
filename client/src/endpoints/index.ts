@@ -20,17 +20,17 @@ export const checkUsername = async (username: string) => {
   return response.data.isAvailable;
 };
 
-export const fetchQuizItems = async () => {
-  const response = await api.get('/quiz', { withCredentials: true });
-  return response.data;
-};
-
 export const fetchClue = async (id: string) => {
   const response = await api.get(`/quiz/${id}/clue`, { withCredentials: true });
   return response.data;
 };
 
-export const checkAnswers = async (answers: any) => {
-  const response = await api.post('/quiz/check-answers', { withCredentials: true, answers });
+export const updateScore = async (answer: any, usedClue:boolean) => {
+  const response = await api.post('/quiz/update-score', { withCredentials: true, answer, usedClue});
+  return response.data;
+};
+
+export const getRandomQuiz = async () => {
+  const response = await api.get('/quiz/random', { withCredentials: true });
   return response.data;
 };
