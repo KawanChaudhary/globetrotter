@@ -10,6 +10,7 @@ import {
   UserIcon,
   EnvelopeIcon,
 } from "@heroicons/react/20/solid";
+import Loader from '@/components/Loader';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Register = () => {
   };
 
   return (
+    <Loader isLoading={loading}>
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="relative">
         <UserIcon className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -78,6 +80,7 @@ const Register = () => {
         <p className="text-red-500 text-sm mt-2 text-center">{error}</p>
       )}
     </form>
+    </Loader>
   );
 };
 
