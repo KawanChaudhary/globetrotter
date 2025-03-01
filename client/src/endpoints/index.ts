@@ -21,12 +21,12 @@ export const checkUsername = async (username: string) => {
 };
 
 export const fetchClue = async (id: string) => {
-  const response = await api.get(`/quiz/${id}/clue`, { withCredentials: true });
+  const response = await api.get(`/quiz/clue/${id}`, { withCredentials: true });
   return response.data;
 };
 
-export const updateScore = async (answer: any, usedClue:boolean) => {
-  const response = await api.post('/quiz/update-score', { withCredentials: true, answer, usedClue});
+export const updateScore = async (answer: any) => {
+  const response = await api.post('/quiz/update-score', { withCredentials: true, answer});
   return response.data;
 };
 

@@ -19,10 +19,13 @@ exports.getRandomQuiz = async (req, res) => {
     await user.save();
 
     const quizData = {
-      id: quizItem[0]._id,
-      trivia: quizItem[0].trivia,
-      options: quizItem[0].options,
       currentScore: user.currentScore,
+      quiz: {
+        id: quizItem[0]._id,
+        trivia: quizItem[0].trivia,
+        options: quizItem[0].options,
+        funFact: quizItem[0].funFact,
+      },
     };
 
     res.status(200).json(quizData);
@@ -46,7 +49,7 @@ exports.getClue = async (req, res) => {
 };
 
 exports.updateCurrentScore = async (req, res) => {
-  const { answer, usedClue } = req.body;
+  const { answer } = req.body;
   const userId = req.user.id;
 
   try {
@@ -60,21 +63,21 @@ exports.updateCurrentScore = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    if (usedClue && quizItem.correctAnswer === answer.answer) {
+    if (answer.usedClue && quizItem.correctAnswer === answer.answer) {
       user.currentScore += 1;
     } else if (quizItem.correctAnswer === answer.answer) {
       user.currentScore += 3;
     }
 
     await user.save();
-
-    const quizDataRem = {
-      correctAnswer: quizItem.correctAnswer,
-      clue: quizItem.clue,
+    const quizData = {
+      currentScore: user.currentScore,
+      quizItem,
     };
 
-    res.status(200).json({ currentScore: user.currentScore, quiz: quizDataRem });
+    res.status(200).json(quizData);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 };

@@ -22,9 +22,11 @@ export interface userResponse {
 
 export interface QuizItem {
   id: string;
-  trivia: string;
+  correctAnswer?: string;
+  trivia?: string;
   options: string[];
-  funFact: string;
+  funFact?: string;
+  clue?:string
 }
 
 export interface ClueResponse {
