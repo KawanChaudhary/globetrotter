@@ -31,6 +31,8 @@ const Home = () => {
     setShowResult(false);
   };
 
+  console.log(user);
+
   return (
     <div className="flex flex-col text-center gap-5 items-center justify-center min-h-screen">
       <div className="m-2 p-6 md:min-w-6/12">
@@ -40,13 +42,13 @@ const Home = () => {
           <Leaderboard />
         </div>
         <div className="mt-6 flex flex-col items-center justify-center md:min-w-6/12">
-          {user && !startQuiz && !showResult ? (
+          {user ? !startQuiz && !showResult ? (
             <PlayQuiz handleStartQuiz={handleStartQuiz} />
           ) : doneQuiz ? (
             <QuizResult handlePlayAgain={handlePlayAgain} />
           ) : (
             <ShowQuiz handleDoneQuiz={handleDoneQuiz} />
-          )}
+          ):null}
         </div>
       </div>
     </div>
