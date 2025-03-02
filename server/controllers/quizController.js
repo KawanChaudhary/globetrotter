@@ -22,14 +22,13 @@ exports.getRandomQuiz = async (req, res) => {
         (Date.now() - new Date(lastQuiz.createdAt).getTime()) / 1000 / 60; // in minutes
 
       if (timeElapsed > 5) {
-        if (user.activeQuiz.score !== 0)
-          user.attempts.push({
-            date: new Date(),
-            correct: user.activeQuiz.quizzes.filter(
-              (q) => q.answer && q.answer === q.quizItem.correctAnswer
-            ).length,
-            score: user.activeQuiz.score,
-          });
+        user.attempts.push({
+          date: new Date(),
+          correct: user.activeQuiz.quizzes.filter(
+            (q) => q.answer && q.answer === q.quizItem.correctAnswer
+          ).length,
+          score: user.activeQuiz.score,
+        });
         user.activeQuiz = null;
         await user.save();
         return res.status(400).json({ message: "Quiz session timed out" });
@@ -114,7 +113,9 @@ exports.getClue = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const quiz = user.activeQuiz.quizzes.find(q => q.quizItem.toString() === id);
+    const quiz = user.activeQuiz.quizzes.find(
+      (q) => q.quizItem.toString() === id
+    );
     if (quiz) {
       quiz.clueUsed = true;
       await user.save();
@@ -156,14 +157,13 @@ exports.updateCurrentScore = async (req, res) => {
           correctAnswer: quizItem.correctAnswer,
         },
       };
-      if (user.activeQuiz.score !== 0)
-        user.attempts.push({
-          date: new Date(),
-          correct: user.activeQuiz.quizzes.filter(
-            (q) => q.answer && q.answer === q.quizItem.correctAnswer
-          ).length,
-          score: user.activeQuiz.score,
-        });
+      user.attempts.push({
+        date: new Date(),
+        correct: user.activeQuiz.quizzes.filter(
+          (q) => q.answer && q.answer === q.quizItem.correctAnswer
+        ).length,
+        score: user.activeQuiz.score,
+      });
       user.highestScore = Math.max(user.highestScore, user.activeQuiz.score);
       user.activeQuiz = null;
       await user.save();

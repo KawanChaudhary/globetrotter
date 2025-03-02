@@ -41,7 +41,6 @@ const UserCard = () => {
   };
 
   return (
-    <Loader isLoading={loading}>
       <div className="bg-gradient-to-r from-rose-500 to-red-600 p-8 rounded-lg shadow-lg w-full max-w-md text-white">
         <div className="flex justify-center items-center mb-4 relative">
           <UserIcon className="h-16 w-16 text-white" />
@@ -68,7 +67,6 @@ const UserCard = () => {
           <ul className="space-y-2">{lastThreeScores}</ul>
         </div>
       </div>
-    </Loader>
   );
 };
 

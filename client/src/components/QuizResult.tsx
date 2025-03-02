@@ -77,9 +77,10 @@ const QuizResult: React.FC<QuizResultProps> = ({ handlePlayAgain }) => {
           <p className="text-2xl font-bold">Total Score: {lastAttempt.score}</p>
           <p className="text-xl">Total Correct Answers: {lastAttempt.correct}</p>
           </div>
-          {isHighScore && (
+          {isHighScore && lastAttempt.score > 0 && (
             <p className="text-xl text-green-500 font-bold">Congratulations! You've set a new high score!</p>
           )}
+          {lastAttempt.score === 0 && <p className="text-xl text-rose-500 font-bold">You need to work on your skills {":("}</p>}
         </div>
         <div className="relative flex justify-around">
           <div className={`p-2 cursor-pointer border-2 border-rose-700 text-rose-700 font-bold 
