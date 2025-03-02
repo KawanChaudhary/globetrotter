@@ -5,7 +5,7 @@ Welcome to Globetrotter, an engaging quiz application that tests your knowledge 
 ## 📹 Short Video
 
 <video width="600" controls>
-  <source src="[https://raw.githubusercontent.com/username/repository/main/video.mp4](https://github.com/KawanChaudhary/globetrotter/blob/main/quiz.mp4)" type="video/mp4">
+  <source src="https://raw.githubusercontent.com/username/repository/main/video.mp4" type="video/mp4">
 </video>
 
 
