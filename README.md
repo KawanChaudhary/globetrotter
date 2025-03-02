@@ -4,7 +4,7 @@ Welcome to Globetrotter, an engaging quiz application that tests your knowledge 
 
 ## 📹 Short Video
 
-
+https://github.com/KawanChaudhary/globetrotter/blob/main/quiz.mp4
 
 Created a short video showcasing the Globetrotter app in action. Highlight the following features:
 1. User registration and login.
