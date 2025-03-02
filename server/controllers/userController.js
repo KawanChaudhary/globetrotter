@@ -22,13 +22,13 @@ exports.register = async (req, res) => {
     const refreshToken = generateRefreshToken(newUser);
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "None",
     });
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "None",
     });
 
     const user = newUser.toObject();
@@ -64,13 +64,13 @@ exports.login = async (req, res) => {
     const refreshToken = generateRefreshToken(user);
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "None",
     });
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "None",
     });
 
     const userWithoutPassword = user.toObject();
@@ -106,13 +106,13 @@ exports.refreshToken = async (req, res) => {
     const newRefreshToken = generateRefreshToken(user);
     res.cookie("accessToken", newAccessToken, {
     httpOnly: true,
-    secure: false,
-    sameSite: "Lax",
+    secure: true,
+    sameSite: "None",
   });
     res.cookie("refreshToken", newRefreshToken, {
     httpOnly: true,
-    secure: false,
-    sameSite: "Lax",
+    secure: true,
+    sameSite: "None",
   });
 
     res.status(200).json({ message: "Token refreshed successfully" });
