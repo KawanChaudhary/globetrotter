@@ -16,7 +16,6 @@ exports.getRandomQuiz = async (req, res) => {
       user.activeQuiz.quizzes &&
       user.activeQuiz.quizzes.length > 0
     ) {
-      console.log("quiz", user.activeQuiz.quizzes);
       const lastQuiz =
         user.activeQuiz.quizzes[user.activeQuiz.quizzes.length - 1];
       const timeElapsed =
@@ -102,12 +101,25 @@ exports.getRandomQuiz = async (req, res) => {
 
 exports.getClue = async (req, res) => {
   const { id } = req.params;
+  const userId = req.user.id;
 
   try {
     const quizItem = await QuizItem.findById(id);
     if (!quizItem) {
       return res.status(404).json({ message: "Quiz item not found" });
     }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const quiz = user.activeQuiz.quizzes.find(q => q.quizItem.toString() === id);
+    if (quiz) {
+      quiz.clueUsed = true;
+      await user.save();
+    }
+
     res.status(200).json({ clue: quizItem.clue });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
@@ -166,7 +178,7 @@ exports.updateCurrentScore = async (req, res) => {
       return res.status(404).json({ message: "Quiz item not found" });
     }
 
-    if (answer.usedClue && quizItem.correctAnswer === answer.answer) {
+    if (lastQuiz.clueUsed && quizItem.correctAnswer === answer.answer) {
       user.activeQuiz.score += 1;
     } else if (quizItem.correctAnswer === answer.answer) {
       user.activeQuiz.score += 3;

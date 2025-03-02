@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/reducers";
 import {
@@ -14,25 +14,25 @@ const UserCard = () => {
   const { user, loading } = useSelector((state: RootState) => state.auth);
   const [attempts, setAttempts] = useState([]);
   const dispatch = useDispatch();
-  const sortAttempts = () => {
-    const sorted = [...user.attempts].sort((a, b) => b.score - a.score);
-    setAttempts(sorted);
-  };
-
   useEffect(() => {
-    sortAttempts();
-  }, []);
+    if (user?.attempts?.length) {
+      const sorted = [...user.attempts]
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3);
+      setAttempts(sorted);
+    }
+  }, [user?.attempts]);
 
-  const lastThreeScores = attempts.slice(-3).map((attempt, index) => (
+  const lastThreeScores = attempts.map((attempt, index) => (
     <li
       key={index}
       className="flex justify-between items-center p-2 bg-gray-100 rounded-lg"
     >
       <span className="flex items-center text-red-400">
         <CalendarIcon className="h-5 w-5 text-red-400 mr-2" />
-        {new Date(attempt.date).toLocaleDateString()}
+        {new Date(attempt?.date).toLocaleDateString()}
       </span>
-      <span className="text-red-400 font-bold">{attempt.score}</span>
+      <span className="text-red-400 font-bold">{attempt?.score}</span>
     </li>
   ));
 
@@ -50,15 +50,15 @@ const UserCard = () => {
             onClick={handleLogout}
           />
         </div>
-        <h2 className="text-3xl font-bold text-center mb-4">{user.username}</h2>
+        <h2 className="text-3xl font-bold text-center mb-4">{user?.username}</h2>
         <div className="mb-4">
           <p className="text-lg flex items-center">
             <ChartBarIcon className="h-5 w-5 text-white mr-2" />
-            Attempts: {user.attempts.length}
+            Attempts: {user?.attempts.length}
           </p>
           <p className="text-lg flex items-center">
             <ChartBarIcon className="h-5 w-5 text-white mr-2" />
-            Highest Score: {user.highestScore}
+            Highest Score: {user?.highestScore}
           </p>
         </div>
         <div>

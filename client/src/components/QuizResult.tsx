@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/reducers";
 import { toPng } from "html-to-image";
-import { ArrowUpTrayIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { FaWhatsapp, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 interface QuizResultProps {
@@ -68,12 +68,15 @@ const QuizResult: React.FC<QuizResultProps> = ({ handlePlayAgain }) => {
 
   return (
    
-      <div ref={resultRef} className="w-full max-w-4xl p-8 bg-gray-100 rounded-lg shadow-lg text-black">
+      <div ref={resultRef} className="w-full max-w-4xl p-8 bg-gray-100 rounded-lg shadow-lg text-black font-mono">
         <h1 className="text-4xl font-bold text-center mb-8">Quiz Result</h1>
         <h1 className="text-4xl font-bold text-center mb-8">{user.username}</h1>
-        <div className="flex items-center justify-around text-center mb-8">
+        <div className=" justify-around text-center mb-8">
+          <div className="flex items-center justify-around mb-8">
+
           <p className="text-2xl font-bold">Total Score: {lastAttempt.score}</p>
           <p className="text-xl">Total Correct Answers: {lastAttempt.correct}</p>
+          </div>
           {isHighScore && (
             <p className="text-xl text-green-500 font-bold">Congratulations! You've set a new high score!</p>
           )}

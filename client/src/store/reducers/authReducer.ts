@@ -3,6 +3,7 @@ import { User } from '../../types';
 
 interface AuthState {
   user: User | null;
+  activeQuiz: Record<string, any> | null;
   loading: boolean;
   error: string | null;
 }
@@ -11,6 +12,7 @@ const initialState: AuthState = {
   user: null,
   loading: false,
   error: null,
+  activeQuiz: null,
 };
 
 const authSlice = createSlice({
@@ -24,6 +26,7 @@ const authSlice = createSlice({
     loginSuccess(state, action: PayloadAction<User>) {
       state.user = action.payload;
       state.loading = false;
+      state.activeQuiz = action.payload.activeQuiz ?? null;
     },
     loginFailure(state, action: PayloadAction<string>) {
       state.loading = false;
@@ -34,7 +37,6 @@ const authSlice = createSlice({
       state.error = null;
     },
     registerSuccess(state, action: PayloadAction<User>) {
-      console.log(action.payload);
       state.user = action.payload;
       state.loading = false;
     },
@@ -57,17 +59,21 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
       state.user = null;
+      state.activeQuiz = null;
     },
     logoutSuccess(state) {
       state.user = null;
       state.loading = false;
+      state.activeQuiz = null;
     },
     fetchUserRequest: (state) => {
       state.loading = true;
+      state.activeQuiz = null;
     },
     fetchUserSuccess: (state, action) => {
       state.user = action.payload;
       state.loading = false;
+      state.activeQuiz = action.payload.activeQuiz ?? null;
     },
     fetchUserFailure: (state) => {
       state.loading = false;

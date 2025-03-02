@@ -2,7 +2,6 @@ export interface User {
   id: string;
   email: string;
   username: string;
-  numberOfAttempts: number;
   highestScore: number;
   attempts: {
     date: string;
@@ -12,6 +11,7 @@ export interface User {
     unattempted: number;
     score: number;
   }[];
+  activeQuiz: Record<string, any> | null;
 }
 
 export interface userResponse {

@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
     score: { type: Number, default: 0 },
     quizzes: [
       {
+        clueUsed: { type: Boolean, default: false },
         quizItem: { type: mongoose.Schema.Types.ObjectId, ref: 'QuizItem' },
         answer: { type: String, default: null },
         createdAt: { type: Date, default: Date.now },
