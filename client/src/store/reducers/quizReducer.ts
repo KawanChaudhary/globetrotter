@@ -60,11 +60,11 @@ const quizSlice = createSlice({
     },
     checkAnswerRequest(state, action) {
       state.error = null;
-      state.submitted = true;
       state.chosedAnswer = action.payload.answer;
     },
     checkAnswerSuccess(state, action) {
       state.loading = false;
+      state.submitted = true;
       state.quiz = action.payload.quiz;
       state.currentScore = action.payload.currentScore;
       state.isCorrect = action.payload.quiz.correctAnswer === state.chosedAnswer;
