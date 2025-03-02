@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 exports.getLeaderboard = async (req, res) => {
   try {
-    const topScorers = await User.find().sort({ highestScore: -1 }).limit(10);
+    const topScorers = await User.find().sort({ highestScore: -1 }).limit(5);
     const leaderboard = topScorers.map(user => ({
       username: user.username,
       score: user.highestScore,

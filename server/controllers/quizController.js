@@ -16,6 +16,7 @@ exports.getRandomQuiz = async (req, res) => {
       user.activeQuiz.quizzes &&
       user.activeQuiz.quizzes.length > 0
     ) {
+      console.log("quiz", user.activeQuiz.quizzes);
       const lastQuiz =
         user.activeQuiz.quizzes[user.activeQuiz.quizzes.length - 1];
       const timeElapsed =

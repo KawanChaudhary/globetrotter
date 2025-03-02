@@ -37,7 +37,7 @@ const Leaderboard = () => {
           {leaderboard.map((entry, index) => (
             <li
               key={index}
-              className="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-md"
+              className="flex justify-between items-center p-1 bg-gray-100 rounded-lg shadow-md"
             >
               <div className="flex items-center space-x-4">
                 <UserIcon className="h-6 w-6 text-blue-500" />
