@@ -2,7 +2,9 @@
 
 Welcome to Globetrotter, an engaging quiz application that tests your knowledge about the world. This project includes both backend and frontend components, and this README will guide you through setting up and running the project.
 
-## 📹 Short Video Idea [Click here to copy the short video idea link](#) 
+## 📹 Short Video
+
+
 
 Created a short video showcasing the Globetrotter app in action. Highlight the following features:
 1. User registration and login.
