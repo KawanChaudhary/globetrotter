@@ -47,6 +47,8 @@ const Register = () => {
           onChange={(e) => setUsername(e.target.value)}
           className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
           placeholder="Username"
+          required
+          minLength={3}
         />
       </div>
       <div className="relative">
@@ -57,6 +59,7 @@ const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
           placeholder="Email"
+          required
         />
       </div>
       <div className="relative">
@@ -67,6 +70,8 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
           placeholder="Password"
+          required
+          minLength={6}
         />
       </div>
       <button

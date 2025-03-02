@@ -14,11 +14,6 @@ const QuizResult: React.FC<QuizResultProps> = ({ handlePlayAgain }) => {
   const lastAttempt = user?.attempts[user.attempts.length - 1];
   const isHighScore = lastAttempt && lastAttempt.score === user.highestScore;
   const resultRef = useRef<HTMLDivElement>(null);
-  const [showShareOptions, setShowShareOptions] = useState(false);
-
-  const handleShare = async () => {
-    setShowShareOptions(!showShareOptions);
-  };
 
   const handleShareOnPlatform = async (platform: string) => {
     if (resultRef.current) {
@@ -75,7 +70,8 @@ const QuizResult: React.FC<QuizResultProps> = ({ handlePlayAgain }) => {
    
       <div ref={resultRef} className="w-full max-w-4xl p-8 bg-gray-100 rounded-lg shadow-lg text-black">
         <h1 className="text-4xl font-bold text-center mb-8">Quiz Result</h1>
-        <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-center mb-8">{user.username}</h1>
+        <div className="flex items-center justify-around text-center mb-8">
           <p className="text-2xl font-bold">Total Score: {lastAttempt.score}</p>
           <p className="text-xl">Total Correct Answers: {lastAttempt.correct}</p>
           {isHighScore && (

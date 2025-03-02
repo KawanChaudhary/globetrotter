@@ -50,7 +50,9 @@ const quizSlice = createSlice({
     },
     getClueSuccess(state, action: PayloadAction<string>) {
       state.loading = false;
-      state.quiz.clue = action.payload;
+      if (state.quiz) {
+        state.quiz.clue = action.payload;
+      }
     },
     getClueFailure(state, action: PayloadAction<string>) {
       state.loading = false;

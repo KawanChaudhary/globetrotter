@@ -1,5 +1,5 @@
 import { call, put, takeLatest, debounce } from 'redux-saga/effects';
-import { login, register, checkUsername, getUserDetails } from '../../endpoints';
+import { login, register, checkUsername, getUserDetails, logout } from '../../endpoints';
 import {
   loginRequest,
   loginSuccess,
@@ -10,12 +10,16 @@ import {
   checkUsernameRequest,
   checkUsernameSuccess,
   checkUsernameFailure,
-  fetchUserRequest, fetchUserSuccess, fetchUserFailure
+  fetchUserRequest, fetchUserSuccess, fetchUserFailure,
+  logoutRequest, logoutSuccess
 } from '../reducers/authReducer';
-import { User, userResponse } from '@/types';
+import { userResponse } from '@/types';
 
-function* handleLogin(action: ReturnType<typeof loginRequest>) {
+function* handleLogin(action: ReturnType<typeof loginRequest> & { payload: { username: string, password: string } }) {
   try {
+    if (!action.payload) {
+      throw new Error('Payload is undefined');
+    }
     const response: userResponse = yield call(login, action.payload.username, action.payload.password);
     yield put(loginSuccess(response.user));
   } catch (error) {
@@ -50,9 +54,19 @@ function* fetchUserSaga() {
   }
 }
 
+function* handleLogout() {
+  try {
+    yield call(logout);
+    yield put(logoutSuccess());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(loginRequest.type, handleLogin);
   yield takeLatest(registerRequest.type, handleRegister);
   yield debounce(500, checkUsernameRequest.type, handleCheckUsername);
+  yield takeLatest(logoutRequest.type, handleLogout);
   yield takeLatest(fetchUserRequest.type, fetchUserSaga);
 }

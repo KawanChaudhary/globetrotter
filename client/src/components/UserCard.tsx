@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/reducers";
 import {
   UserIcon,
   ChartBarIcon,
   CalendarIcon,
 } from "@heroicons/react/20/solid";
+import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import Loader from "@/components/Loader";
-import { cloneDeep } from "lodash";
+import { logoutRequest } from "@/store/reducers/authReducer";
 
 const UserCard = () => {
   const { user, loading } = useSelector((state: RootState) => state.auth);
   const [attempts, setAttempts] = useState([]);
+  const dispatch = useDispatch();
   const sortAttempts = () => {
     const sorted = [...user.attempts].sort((a, b) => b.score - a.score);
     setAttempts(sorted);
@@ -34,11 +36,19 @@ const UserCard = () => {
     </li>
   ));
 
+  const handleLogout = () => {
+    dispatch(logoutRequest());
+  };
+
   return (
     <Loader isLoading={loading}>
       <div className="bg-gradient-to-r from-rose-500 to-red-600 p-8 rounded-lg shadow-lg w-full max-w-md text-white">
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center items-center mb-4 relative">
           <UserIcon className="h-16 w-16 text-white" />
+          <ArrowLeftStartOnRectangleIcon
+            className="h-5 w-5 text-white absolute top-0 right-0 cursor-pointer hover:text-gray-300"
+            onClick={handleLogout}
+          />
         </div>
         <h2 className="text-3xl font-bold text-center mb-4">{user.username}</h2>
         <div className="mb-4">

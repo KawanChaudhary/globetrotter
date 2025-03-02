@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch} from "react-redux";
 import AppRoutes from "./routes";
 import { fetchUserRequest } from "./store/reducers/authReducer";
 import Loader from '@/components/Loader';
 
 function App() {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state: RootState) => state.auth);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchUserRequest());
+    setTimeout(() => {setLoading(false)}, 1000);
   }, [dispatch]);
 
   return (

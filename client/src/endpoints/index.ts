@@ -6,6 +6,7 @@ export const login = async (username: string, password: string) => {
 };
 
 export const register = async (username: string, email: string, password: string) => {
+  console.log(username, email, password);
   const response = await api.post('/users/register', { username, email, password });
   return response.data;
 };
@@ -34,3 +35,7 @@ export const getRandomQuiz = async () => {
   const response = await api.get('/quiz/random', { withCredentials: true });
   return response.data;
 };
+
+export const logout = async () => {
+  await api.post('/users/logout', {}, { withCredentials: true });
+}

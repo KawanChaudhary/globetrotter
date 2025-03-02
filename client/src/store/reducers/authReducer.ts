@@ -34,6 +34,7 @@ const authSlice = createSlice({
       state.error = null;
     },
     registerSuccess(state, action: PayloadAction<User>) {
+      console.log(action.payload);
       state.user = action.payload;
       state.loading = false;
     },
@@ -42,7 +43,7 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
     checkUsernameRequest(state) {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     checkUsernameSuccess(state) {
@@ -52,8 +53,13 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    logout(state) {
+    logoutRequest(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    logoutSuccess(state) {
       state.user = null;
+      state.loading = false;
     },
     fetchUserRequest: (state) => {
       state.loading = true;
@@ -62,8 +68,7 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.loading = false;
     },
-    fetchUserFailure: (state, action) => {
-      state.error = action.payload;
+    fetchUserFailure: (state) => {
       state.loading = false;
     },
   },
@@ -79,7 +84,8 @@ export const {
   checkUsernameRequest,
   checkUsernameSuccess,
   checkUsernameFailure,
-  logout,
+  logoutSuccess,
+  logoutRequest,
   fetchUserRequest,
   fetchUserFailure,
   fetchUserSuccess

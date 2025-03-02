@@ -12,3 +12,6 @@ export const registerFailure = createAction<string>('auth/registerFailure');
 export const checkUsernameRequest = createAction<string>('auth/checkUsernameRequest');
 export const checkUsernameSuccess = createAction<boolean>('auth/checkUsernameSuccess');
 export const checkUsernameFailure = createAction<string>('auth/checkUsernameFailure');
+
+export const logoutRequest = createAction('auth/logoutRequest');
+export const logoutSuccess = createAction('auth/logoutSuccess');

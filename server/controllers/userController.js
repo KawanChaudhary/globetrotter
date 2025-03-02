@@ -14,11 +14,10 @@ exports.register = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-
+    
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
-
     const accessToken = generateAccessToken(newUser);
     const refreshToken = generateRefreshToken(newUser);
     res.cookie("accessToken", accessToken, {
@@ -34,7 +33,6 @@ exports.register = async (req, res) => {
 
     const user = newUser.toObject();
     delete user.password;
-
     res
       .status(201)
       .json({
@@ -43,6 +41,7 @@ exports.register = async (req, res) => {
         user,
       });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -153,4 +152,10 @@ exports.checkUsername = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: "Server error" });
   }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
+  res.status(200).json({ message: "Logged out successfully" });
 };
