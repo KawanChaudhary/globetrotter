@@ -155,7 +155,7 @@ exports.checkUsername = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
+  res.clearCookie("accessToken", { httpOnly: true, secure: true, sameSite: "None" });
+  res.clearCookie("refreshToken", { httpOnly: true, secure: true, sameSite: "None" });
   res.status(200).json({ message: "Logged out successfully" });
 };
