@@ -4,9 +4,10 @@ Welcome to Globetrotter, an engaging quiz application that tests your knowledge 
 
 ## 📹 Short Video
 
-<video width="600" controls>
-  <source src="https://raw.githubusercontent.com/username/repository/main/video.mp4" type="video/mp4">
-</video>
+
+
+https://github.com/user-attachments/assets/853de1da-906e-4fa1-938f-c305eae91d76
+
 
 
 Created a short video showcasing the Globetrotter app in action. Highlight the following features:
