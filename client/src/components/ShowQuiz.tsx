@@ -12,10 +12,10 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import sadAnimation from "../assets/sad.json";
 
 interface ShowQuizProps {
-    handleDoneQuiz: () => void;
+  handleDoneQuiz: () => void;
 }
 
-const ShowQuiz:React.FC<ShowQuizProps> = ({handleDoneQuiz}) => {
+const ShowQuiz: React.FC<ShowQuizProps> = ({ handleDoneQuiz }) => {
   const dispatch = useDispatch();
   const { quiz, loading, error, clueUsed, submitted, currentScore, isCorrect } =
     useSelector((state: RootState) => state.quiz);
@@ -104,30 +104,32 @@ const ShowQuiz:React.FC<ShowQuizProps> = ({handleDoneQuiz}) => {
         <h2 className="text-2xl font-bold mb-4 font-mono">{quiz.trivia}</h2>
         <div className="flex justify-between ">
           <ul className="mb-4">
-            {quiz.options && quiz?.options.length > 0 && quiz?.options.map((option, index) => (
-              <li key={index} className="mb-2">
-                <label
-                  className={`flex items-center font-mono ${
-                    submitted
-                      ? quiz.correctAnswer === option
-                        ? "text-green-500"
-                        : "text-red-500"
-                      : "text-gray-900"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="option"
-                    disabled={submitted}
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={() => handleOptionChange(option)}
-                    className="mr-2"
-                  />
-                  {option}
-                </label>
-              </li>
-            ))}
+            {quiz.options &&
+              quiz?.options.length > 0 &&
+              quiz?.options.map((option, index) => (
+                <li key={index} className="mb-2">
+                  <label
+                    className={`flex items-center font-mono ${
+                      submitted
+                        ? quiz.correctAnswer === option
+                          ? "text-green-500"
+                          : "text-red-500"
+                        : "text-gray-900"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="option"
+                      disabled={submitted}
+                      value={option}
+                      checked={selectedOption === option}
+                      onChange={() => handleOptionChange(option)}
+                      className="mr-2"
+                    />
+                    {option}
+                  </label>
+                </li>
+              ))}
           </ul>
           <p className="flex items-center justify-around">
             <span className="font-bold">Score: {currentScore}</span>
@@ -170,7 +172,7 @@ const ShowQuiz:React.FC<ShowQuizProps> = ({handleDoneQuiz}) => {
                 isCorrect ? (
                   <span className="flex items-center gap-2">
                     <span>Next in</span>
-                    <span className="w-6 h-6 flex items-center justify-center from-red-50 to-red-200 text-blue-500 font-bold rounded-full">
+                    <span className="w-6 h-6 flex items-center justify-center bg-green-800 text-white hover:bg-white hover:text-green-800 font-bold rounded-full">
                       {timer}
                     </span>
                   </span>
